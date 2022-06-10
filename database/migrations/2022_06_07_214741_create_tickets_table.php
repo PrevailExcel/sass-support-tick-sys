@@ -15,6 +15,8 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->boolean('type')->comment('1 for Private, 0 for Public');
+            $table->boolean('open')->comment('1 for Open, 0 for Closed');
             $table->timestamps();
         });
     }
