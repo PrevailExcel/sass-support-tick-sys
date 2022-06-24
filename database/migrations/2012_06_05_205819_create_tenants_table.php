@@ -18,6 +18,8 @@ class CreateTenantsTable extends Migration
             $table->string('name');
             $table->string('subdomain')->unique();
             $table->string('email')->unique();
+            $table->string('color', 12)->default('#fdfdfd');
+            $table->string('logo')->nullable();
             $table->boolean('activated')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

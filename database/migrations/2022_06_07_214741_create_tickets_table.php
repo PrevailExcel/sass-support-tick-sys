@@ -19,6 +19,8 @@ class CreateTicketsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('agent_id')->nullable();
             $table->text('message');
+            $table->string('subject');
+            $table->string('extra')->nullable()->comment('Tenant can use this field for product or category');
             $table->boolean('type')->comment('1 for Private, 0 for Public')->default(1);
             $table->boolean('open')->comment('1 for Open, 0 for Closed')->default(1);
             $table->string('file_1')->nullable();
