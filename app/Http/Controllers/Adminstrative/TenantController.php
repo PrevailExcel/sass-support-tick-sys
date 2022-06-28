@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ConfigureTenant;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,11 +23,13 @@ class TenantController extends Controller
             return redirect()->back()->withErrors($validate->errors());
         }
 
-        Tenant::create([
+        $tenant = Tenant::create([
             'name' => $request->name,
             'subdomain' => $request->subdomain,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        ConfigureTenant::dispatch($tenant);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Tenant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,14 +14,15 @@ class ConfigureTenant implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private $tenant;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Tenant $tenant)
     {
-        //
+        $this->tenant = $tenant; 
     }
 
     /**
@@ -30,6 +32,7 @@ class ConfigureTenant implements ShouldQueue
      */
     public function handle()
     {
-        //
+        // create Subdomain confirguration
+        //Set up tables
     }
 }
