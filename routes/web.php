@@ -22,12 +22,13 @@ Route::get('/', function () {
 
 
 //Email Verification routes
-Route::get('/email/verify', [EmailVerificationController::class, 'show'])->middleware('auth')->name('verification.notice');
- 
-Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::controller(EmailVerificationController::class)->group(function () {
+    Route::get('/email/verify', 'show')->middleware('auth')->name('verification.notice');
 
-Route::post('/email/verification-notification', [EmailVerificationController::class, 'notify'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+    Route::get('/email/verify/{id}/{hash}', 'verify')->middleware(['auth', 'signed'])->name('verification.verify');
 
+    Route::post('/email/verification-notification', 'notify')->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+});
 
 Route::get('/profile', function () {
     // Only verified users may access this route...
